@@ -3,12 +3,31 @@ import Grid from "./components/Grid";
 import Tile from "./components/Tile";
 
 const gameBoard = document.getElementById("game-board");
-const grid = new Grid(gameBoard);
+let grid;
+initGame(4);
 
-grid.randomEmptyCell().tile = new Tile(gameBoard);
-grid.randomEmptyCell().tile = new Tile(gameBoard);
+function initGame(gridSize) {
+  grid = new Grid(gameBoard, gridSize);
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
 
-setupInput();
+  setupInput();
+}
+
+const gridOptions = document.querySelector(".grid-options");
+gridOptions.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("grid-size")) return;
+
+  const gridSize = parseInt(e.target.getAttribute("data-grid-size"), 10);
+
+  e.target.parentElement
+    .querySelectorAll(".grid-size")
+    .forEach((button) => button.classList.remove("selected"));
+  e.target.classList.add("selected");
+
+  gameBoard.innerHTML = "";
+  initGame(gridSize);
+});
 
 function setupInput() {
   window.addEventListener("keydown", handleInput, { once: true });

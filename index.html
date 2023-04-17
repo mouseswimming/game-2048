@@ -7,7 +7,17 @@
     <title>2048 Game</title>
   </head>
   <body>
-    <div id="game-board"></div>
+    <div>
+      <div class="grid-options">
+        <button data-grid-size="4" class="grid-size selected">4x4</button>
+        <button data-grid-size="5" class="grid-size">5x5</button>
+        <button data-grid-size="6" class="grid-size">6x6</button>
+        <button data-grid-size="7" class="grid-size">7x7</button>
+        <button data-grid-size="8" class="grid-size">8x8</button>
+      </div>
+
+      <div id="game-board"></div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

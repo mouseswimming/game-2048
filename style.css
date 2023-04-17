@@ -17,15 +17,42 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-size: 7.5vmin;
+
   margin: 0;
 }
 
-#game-board {
-  /* --grid-size: 4;
-  --cell-size: 20vmin;
-  --cell-gap: 2vmin; */
+.grid-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  column-gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
 
+.grid-options button {
+  background-color: lightgray;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 55rem) {
+  .grid-options button {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+.grid-options button.selected {
+  background-color: lightblue;
+  cursor: default;
+}
+
+#game-board {
+  font-size: var(--font-size);
   display: grid;
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
@@ -42,11 +69,6 @@ body {
 }
 
 .tile {
-  /* --x: 3;
-  --y: 2;
-  --cell-bg-lightness: 80%;
-  --cell-text-lightness: 20%; */
-
   position: absolute;
   width: var(--cell-size);
   height: var(--cell-size);

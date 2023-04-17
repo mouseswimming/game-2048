@@ -1,23 +1,33 @@
 import Cell from "./Cell";
 
-const GRID_SIZE = 4;
-const CELL_SIZE = 20;
-const CELL_GAP = 2;
+// const gridSize = 4;
+// const cellSize = 20;
+// const cellGap = 2;
+
+let gridSize, cellGap, cellSize, fontSize;
 
 export default class Grid {
   // make cells a private variables
   #cells;
 
-  constructor(gridElement) {
-    gridElement.style.setProperty("--grid-size", GRID_SIZE);
-    gridElement.style.setProperty("--cell-size", `${CELL_SIZE}vmin`);
-    gridElement.style.setProperty("--cell-gap", `${CELL_GAP}vmin`);
+  constructor(gridElement, _gridSize = 4) {
+    gridSize = _gridSize;
+    cellGap = gridSize > 6 ? 1 : 2;
+    cellSize = Math.floor((90 - (gridSize - 1) * cellGap) / gridSize);
+    fontSize = Math.round(((8 * 4) / gridSize) * 10) / 10;
+
+    console.log({ gridSize, cellGap, cellSize, fontSize });
+
+    gridElement.style.setProperty("--grid-size", gridSize);
+    gridElement.style.setProperty("--cell-size", `${cellSize}vmin`);
+    gridElement.style.setProperty("--cell-gap", `${cellGap}vmin`);
+    gridElement.style.setProperty("--font-size", `${fontSize}vmin`);
 
     this.#cells = createCellElements(gridElement).map((cellElement, index) => {
       return new Cell(
         cellElement,
-        index % GRID_SIZE,
-        Math.floor(index / GRID_SIZE)
+        index % gridSize,
+        Math.floor(index / gridSize)
       );
     });
   }
@@ -56,7 +66,7 @@ export default class Grid {
 function createCellElements(gridElement) {
   const cells = [];
 
-  for (let i = 0; i < GRID_SIZE ** 2; i++) {
+  for (let i = 0; i < gridSize ** 2; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cell");
     cells.push(cell);
